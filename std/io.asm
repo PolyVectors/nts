@@ -2,6 +2,7 @@ format ELF64
 
 public std_io_print
 
+section '.text' executable
 std_io_print:
         push rdi
         push rdi
