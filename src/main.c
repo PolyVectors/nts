@@ -7,6 +7,6 @@ void _start() {
 
   std_io_print(array, STDOUT_FILENO);
 
-  std_mem_free(array, sizeof(char) * 4);
+  std_mem_free(array, sizeof(char) * 20);
   std_sys_exit(0);
 }
