@@ -1,11 +1,12 @@
 .PHONY: build std clean
 
 build: std
-	gcc -m64 -nostdlib -ffreestanding -s -O3 src/main.c bin/* -o main
+	gcc -m64 -std=c99 -nostdlib -ffreestanding -s -O3 src/main.c bin/* -o main
 
 std: src/main.c std/sys.asm std/io.asm
-	fasm std/sys.asm bin/sys.o
 	fasm std/io.asm bin/io.o
+	fasm std/mem.asm bin/mem.o
+	fasm std/sys.asm bin/sys.o
 
 clean:
 	rm -f bin/sys.o bin/io.o main
