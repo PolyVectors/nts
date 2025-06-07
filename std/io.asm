@@ -11,7 +11,7 @@ std_io_print:
         xor al, al
         repne scasb
 
-        mov rdx, rdi
+        lea rdx, [rdi]
         pop rdi
         sub rdx, rdi
         dec rdx
