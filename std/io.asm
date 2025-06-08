@@ -5,6 +5,8 @@ public std_io_read
 
 section '.text' executable
 std_io_print:
+        xchg rdi, rsi
+
         push rsi
         push rdi
         push rdi

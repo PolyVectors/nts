@@ -4,7 +4,7 @@
 #define STDOUT_FILENO 1
 #define STDERR_FILENO 2
 
-extern void std_io_print(char* buf, i32 fd);
+extern void std_io_print(i32 fd, const char* buf);
 extern int std_io_read(i32 fd, char* buf, u64 count);
 
 extern void* std_mem_malloc(u64 lengthint);
