@@ -1,12 +1,18 @@
 #include "../std/std.h"
+#include "../termios/termios.h"
+
+void enableRawMode() {
+  struct termios raw;
+  //tcgetattr(STDIN_FILENO, &raw);
+  //raw.c_lflag &= ~(ECHO);
+  //tcsetattr(STDIN_FILENO, TCSAFLUSH, &raw);
+}
 
 void _start() {
-  // TODO: dynamic arrays
-  char* array = (char *)std_mem_malloc(sizeof(char) * 20);
-  std_mem_copy(array, "Hello, world!\n");
+  enableRawMode();
 
-  std_io_print(array, STDOUT_FILENO);
+  char c;
+  while (std_io_read(STDIN_FILENO, &c, 1) == 1 && c != 'q');
 
-  std_mem_free(array, sizeof(char) * 20);
   std_sys_exit(0);
 }

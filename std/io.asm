@@ -1,6 +1,7 @@
 format ELF64
 
 public std_io_print
+public std_io_read
 
 section '.text' executable
 std_io_print:
@@ -23,3 +24,7 @@ std_io_print:
         syscall
         ret
 
+std_io_read:
+        mov rax, 0
+        syscall
+        ret
