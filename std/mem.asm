@@ -1,11 +1,12 @@
 format ELF64
 
-public std_mem_malloc
+public std_mem_alloc
 public std_mem_free
-public std_mem_copy
+public std_mem_strcpy
+public std_mem_cpy
 
 section '.text' executable
-std_mem_malloc:
+std_mem_alloc:
         mov rax, 9
         lea rsi, [rdi]
         mov rdx, PROT_READ
@@ -23,7 +24,7 @@ std_mem_free:
         syscall
         ret
 
-std_mem_copy:
+std_mem_strcpy:
         xor r15, r15
 .copy_byte:
         mov r14b, [rsi + r15]
@@ -32,6 +33,21 @@ std_mem_copy:
         
         mov BYTE [rdi + r15], r14b
         inc r15
+        
+        jmp .copy_byte
+.after_copy_byte:
+        ret
+
+std_mem_cpy:
+        xor r15, r15
+.copy_byte:
+        cmp r15, rdx
+        jge .after_copy_byte
+        
+        mov r14b, [rsi + r15]
+        mov BYTE [rdi + r15], r14b
+        inc r15
+        
         jmp .copy_byte
 .after_copy_byte:
         ret

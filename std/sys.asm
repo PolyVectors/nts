@@ -1,7 +1,7 @@
 format ELF64
 
 public std_sys_exit
-public std_sys_syscall3
+public std_sys_ioctl
 
 section '.text' executable
 std_sys_exit:
@@ -9,11 +9,7 @@ std_sys_exit:
         syscall
         ret
 
-std_sys_syscall3:
-        mov rax, rdi
-        mov rdi, rsi
-        mov rsi, rdx
-        mov rdx, rcx
-        
+std_sys_ioctl:
+        mov rax, 16
         syscall
         ret
