@@ -13,7 +13,7 @@ i32 termios_getattr(i32 fd, struct termios* termios_p) {
     termios_p->c_lflag = copy_termios.c_lflag;
 
 
-    // todo: control characters
+    std_mem_copy(termios_p->c_cc, copy_termios.c_cc);
     termios_p->c_line = copy_termios.c_line;
 
     termios_p->c_ispeed = copy_termios.c_ispeed;
