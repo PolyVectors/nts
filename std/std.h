@@ -13,4 +13,3 @@ extern void std_mem_strcpy(void* dest, const void* src);
 extern void std_mem_cpy(void* dest, const void* src, u32 count);
 
 extern void std_sys_exit(i32 error_code);
-extern i32 std_sys_ioctl(u64 fd, u64 cmd, u64 rdx);

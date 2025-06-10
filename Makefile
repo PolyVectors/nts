@@ -8,5 +8,7 @@ std: src/main.c std/sys.asm std/io.asm
 	fasm std/mem.asm bin/mem.o
 	fasm std/sys.asm bin/sys.o
 
+	fasm termios/ioctl.asm bin/ioctl.o
+
 clean:
 	rm -f bin/sys.o bin/io.o main
