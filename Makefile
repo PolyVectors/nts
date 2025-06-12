@@ -1,7 +1,7 @@
 .PHONY: build std clean
 
 build: std
-	gcc -Wall -Wextra -m64 -std=c99 -nostdlib -ffreestanding -fno-stack-protector -s -O3 bin/* termios/termios.c termios/kernel/ioctl.c src/main.c -o main
+	gcc -Wall -Wextra -m64 -std=c99 -nostdlib -ffreestanding -fno-stack-protector -s -O3 bin/* termios/termios.c termios/ioctl.c src/main.c -o main
 
 std: src/main.c std/sys.asm std/io.asm
 	fasm std/io.asm bin/io.o
