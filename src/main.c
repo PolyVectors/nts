@@ -1,7 +1,12 @@
 #include "../std/std.h"
+#include "../termios/termios.h"
 
 void enableRawMode() {
+  struct termios raw;
+  termios_tcgetattr(STDIN_FILENO, &raw);
 
+  raw.c_lflag &= ~(TERMIOS_ECHO | TERMIOS_ICANON);
+  termios_tcsetattr(STDIN_FILENO, 2, &raw);
 }
 
 void _start() {
