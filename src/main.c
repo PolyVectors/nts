@@ -1,12 +1,22 @@
 #include "../std/std.h"
 #include "../termios/termios.h"
 
-void enableRawMode() {
-  struct termios raw;
-  termios_tcgetattr(STDIN_FILENO, &raw);
+struct termios termios_default;
 
-  raw.c_lflag &= ~(TERMIOS_ECHO | TERMIOS_ICANON);
-  termios_tcsetattr(STDIN_FILENO, 2, &raw);
+void enableRawMode() {
+  termios_tcgetattr(STDIN_FILENO, &termios_default);
+
+  struct termios* raw = std_mem_alloc(sizeof(struct termios));
+  std_mem_cpy(raw, &termios_default, sizeof(struct termios));
+
+  raw->c_lflag &= ~(TERMIOS_ECHO | TERMIOS_ICANON);
+  termios_tcsetattr(STDIN_FILENO, TERMIOS_TCSAFLUSH, raw);
+
+  std_mem_free(raw, sizeof(struct termios));
+}
+
+void disableRawMode() {
+  termios_tcsetattr(STDIN_FILENO, TERMIOS_TCSAFLUSH, &termios_default);
 }
 
 void _start() {
@@ -14,6 +24,7 @@ void _start() {
 
   char c;
   while (std_io_read(STDIN_FILENO, &c, 1) == 1 && c != 'q');
-  
+
+  disableRawMode();
   std_sys_exit(0);
 }

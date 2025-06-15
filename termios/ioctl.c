@@ -9,5 +9,6 @@ i32 termios_ioctl(i32 fd, i32 req, ...) {
   __builtin_va_start(args, req);
   arg = __builtin_va_arg(args, void*);
   __builtin_va_end(arg);
+
   return termios_kernel_ioctl(fd, req, (u64)arg);
 }
