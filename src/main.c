@@ -21,9 +21,18 @@ void disableRawMode() {
 
 void _start() {
   enableRawMode();
+  std_io_print(STDOUT_FILENO, "YYYY-MM-DD\n  • ");
 
   char c;
-  while (std_io_read(STDIN_FILENO, &c, 1) == 1 && c != 'q');
+
+  while (std_io_read(STDIN_FILENO, &c, 1) == 1 && c != 'q') {
+    if (c != '\n')
+      std_io_print(STDOUT_FILENO, &c);
+    else
+      std_io_print(STDOUT_FILENO, "\n  • ");
+  }
+
+  std_io_print(STDOUT_FILENO, "\n");
 
   disableRawMode();
   std_sys_exit(0);
