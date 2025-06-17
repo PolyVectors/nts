@@ -25,7 +25,7 @@ void _start() {
 
   char c;
 
-  while (std_io_read(STDIN_FILENO, &c, 1) == 1 && c != 'q') {
+  while (std_io_read(STDIN_FILENO, &c, 1) == 1 && c != 27) {
     if (c != '\n')
       std_io_print(STDOUT_FILENO, &c);
     else
