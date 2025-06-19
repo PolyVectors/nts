@@ -1,10 +1,10 @@
 format ELF64
 
-public std_io_print
+public std_io_fprint
 public std_io_read
 
 section '.text' executable
-std_io_print:
+std_io_fprint:
         xchg rdi, rsi
 
         push rsi
